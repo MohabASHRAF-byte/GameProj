@@ -10,29 +10,32 @@ public class TileManager : MonoBehaviour
     private List<GameObject> activeTiles = new List<GameObject>();
 
     public Transform playerTransform;
+
+    [HideInInspector]
+    public bool autoAssistEnabled = false;
+
     void Start()
     {
         for (int i = 0; i < numberOfTiles; i++)
         {
-            if(i==0)
+            if (i == 0)
                 SpawnTile(0);
             else
                 SpawnTile(Random.Range(0, tilePrefabs.Length));
         }
-            
     }
+
     void Update()
     {
-        if(playerTransform.position.z - 30 > zSpawn -(numberOfTiles * tileLength))
+        if (playerTransform.position.z - 30 > zSpawn - (numberOfTiles * tileLength))
         {
             SpawnTile(Random.Range(0, tilePrefabs.Length));
             DeleteTile();
         }
-            
     }
+
     public void SpawnTile(int tileIndex)
     {
-
         GameObject go = Instantiate(tilePrefabs[tileIndex], transform.forward * zSpawn, transform.rotation);
         activeTiles.Add(go);
         zSpawn += tileLength;
@@ -42,5 +45,12 @@ public class TileManager : MonoBehaviour
     {
         Destroy(activeTiles[0]);
         activeTiles.RemoveAt(0);
+    }
+
+    public GameObject GetCurrentTile()
+    {
+        if (activeTiles.Count >= 2)
+            return activeTiles[1];
+        return null;
     }
 }
