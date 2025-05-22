@@ -123,3 +123,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a64c01def50774a8d89eefdae290620f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  magnetSpeed: 10
+  collectDistance: 10
